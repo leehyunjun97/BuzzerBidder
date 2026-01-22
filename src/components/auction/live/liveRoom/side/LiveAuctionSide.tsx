@@ -1,0 +1,75 @@
+"use client";
+
+import { useState } from "react";
+import { List, MessageCircle } from "lucide-react";
+import LiveSideTabButton from "./LiveSideTabButton";
+import LiveChatList from "./LiveChatList";
+import LiveProductList from "./LiveProductList";
+import Button from "@/components/common/Button";
+import Toast from "@/components/common/Toast";
+
+interface LiveAuctionSideProps {
+  me: User | null | undefined;
+  products: LiveRoomProduct[] | undefined;
+  chat: {
+    messages: LiveChatMessage[];
+    sendMessage: (payload: { content: string }) => void;
+  };
+}
+
+export default function LiveAuctionSide({ me, chat, products }: LiveAuctionSideProps) {
+  const [tab, setTab] = useState("CHAT");
+  const [input, setInput] = useState("");
+  const notify = (message: string, type: ToastType) => Toast({ message, type });
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+    if (!me) {
+      notify("로그인 후 채팅에 참여해보세요!", "ERROR");
+    }
+
+    chat.sendMessage({
+      content: input,
+    });
+
+    setInput("");
+  };
+
+  return (
+    <div className="border-border-main flex h-full min-h-0 w-full min-w-[280px] flex-col border">
+      <div className="border-border-main flex h-14 shrink-0 items-center border-b">
+        <LiveSideTabButton active={tab === "CHAT"} onClick={() => setTab("CHAT")}>
+          <MessageCircle size={18} className="mr-2" /> 채팅
+        </LiveSideTabButton>
+        <LiveSideTabButton active={tab === "PRODUCT"} onClick={() => setTab("PRODUCT")}>
+          <List size={18} className="mr-2" /> 상품 목록
+        </LiveSideTabButton>
+      </div>
+
+      <div className="flex min-h-0 flex-1 flex-col">
+        {tab === "CHAT" && <LiveChatList messages={chat.messages} userId={me?.id} />}
+        {tab === "PRODUCT" && <LiveProductList products={products} />}
+      </div>
+
+      <div className="border-border-sub shrink-0 border-t px-3 py-3">
+        <div className="flex items-end gap-2">
+          <textarea
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder="메시지를 입력해주세요."
+            className="bg-content-area border-border-sub flex-1 resize-none rounded-lg border-2 px-4 py-3 outline-none"
+            onKeyDown={e => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+          />
+          <Button size="sm" onClick={handleSend}>
+            보내기
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}

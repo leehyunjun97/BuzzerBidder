@@ -1,0 +1,229 @@
+"use client";
+
+import Button from "../common/Button";
+import ContentContainer from "../common/ContentContainer";
+import { useRouter } from "next/navigation";
+import BizzAmount from "../common/BizzAmount";
+import { getCategoryLabel } from "@/utils/category";
+import { statusMapping } from "@/utils/product";
+import { MessageCircle, SquarePen } from "lucide-react";
+import { formatDateTime } from "@/utils/date";
+import { Activity, useState } from "react";
+import { useProductDetail } from "@/features/product/hooks/useProductDetail";
+import fullStar from "@/assets/common/fullStar.svg";
+import emptyStar from "@/assets/common/emptyStar.svg";
+
+import dynamic from "next/dynamic";
+import ProductImageCarouselSkeleton from "../skeleton/product/ProductImageCarouselSkeleton";
+import DelayedBidSection from "./DelayedBidSection";
+import DelayedEndTimer from "./DelayedEndTimer";
+import DelayedBuyNowSection from "./DelayedBuyNowSection";
+import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
+import { getDelayStatus } from "@/utils/auction";
+import { useWishToggle } from "@/features/wish/hooks/useWishToggle";
+import Image from "next/image";
+import { LiveActionButton } from "./LiveActionButton";
+import PriceSection from "./PriceSection";
+
+const ProductImageCarousel = dynamic(() => import("./ProductImageCarousel"), {
+  ssr: false,
+  loading: () => <ProductImageCarouselSkeleton />,
+});
+
+interface ProductInfo {
+  initialProduct: ProductDetail;
+  me: User | null;
+}
+
+export default function ProductInfo({ initialProduct, me }: ProductInfo) {
+  const route = useRouter();
+  const { data: product, isLoading, isError } = useProductDetail(initialProduct);
+  const [star, setStar] = useState(product?.isLiked);
+  const [isBidOpen, setIsBidOpen] = useState(false);
+  const [isBuyNowOpen, setIsBuyNowOpen] = useState(false);
+  const isLive = product?.type === "LIVE";
+  const path = isLive ? `/product/live/${product?.id}` : `/product/${product?.id}`;
+  const sellerId = isLive ? product?.sellerId : product?.sellerUserId;
+
+  const { addSubscribedAuctionId, setActiveAuctionId } = useLiveRoomStore(state => state);
+  const { mutate: toggleWish } = useWishToggle();
+
+  if (isLoading) return <div>상품 정보를 불러오는 중...</div>;
+  if (isError) return <div>상품 정보를 불러오는 중 오류가 발생했습니다.</div>;
+  if (!product) return <div>상품 정보가 존재하지 않습니다.</div>;
+
+  return (
+    <div className="mx-auto flex h-fit w-[98%] max-w-[1440px] flex-col gap-7 pb-10">
+      <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch">
+        <ProductImageCarousel
+          images={product?.images}
+          className="w-full"
+          type={isLive ? "LIVE" : "DELAYED"}
+          auctionStatus={product.auctionStatus}
+        />
+
+        <div className="flex flex-col gap-5 lg:h-full">
+          <div className="flex flex-col gap-5">
+            <div className="flex items-start justify-between gap-3">
+              <h1 className="text-title-main-dark text-2xl leading-snug font-bold lg:text-3xl">
+                {product?.name}
+              </h1>
+
+              <span className="bg-btn-active border-border-sub2 rounded-full border px-3 py-1 text-xs whitespace-nowrap text-white">
+                {getCategoryLabel(product?.category)}
+              </span>
+            </div>
+
+            <PriceSection path={path} product={product} />
+
+            <div className="border-border-sub2 rounded-xl border p-4 py-5 text-sm lg:text-base">
+              <div className="grid grid-cols-[80px_1fr] gap-x-3 gap-y-5">
+                <div className="text-title-sub">판매자</div>
+                <div className="text-title-main-dark">{product?.sellerNickname}</div>
+
+                <div className="text-title-sub">상품상태</div>
+                <div className="text-title-main-dark">
+                  {statusMapping(product?.itemStatus || "NEW")}
+                </div>
+
+                <div className="text-title-sub">배송비</div>
+                <div className="text-title-main-dark">
+                  {product?.deliveryInclude ? "포함" : "미포함"}
+                </div>
+
+                <div className="text-title-sub">장소</div>
+                <div className="text-title-main-dark">
+                  {product?.region}
+                  {product?.preferredPlace && ` / ${product.preferredPlace}`}
+                </div>
+
+                {product?.type === "DELAYED" && product.startPrice && (
+                  <>
+                    <div className="text-title-sub">시작가</div>
+                    <div className="text-title-main-dark">
+                      {`${product?.startPrice.toLocaleString()} Bizz`}
+                    </div>
+                  </>
+                )}
+
+                {product?.type === "LIVE" && (
+                  <>
+                    <div className="text-title-sub font-bold">라이브 시작</div>
+                    <div className="text-title-main-dark">
+                      {formatDateTime(product?.liveTime || "")}
+                    </div>
+                  </>
+                )}
+
+                {product?.type === "DELAYED" && (
+                  <DelayedEndTimer
+                    endTime={product?.endTime}
+                    auctionStatus={product.auctionStatus}
+                  />
+                )}
+
+                <div className="text-title-sub">등록일</div>
+                <div className="text-title-main-dark">{formatDateTime(product.createdAt)}</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-3 pt-3">
+            <Button
+              className="flex-1 gap-2"
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                setStar(prev => !prev);
+                toggleWish({
+                  id: product.id,
+                  type: product.type === "LIVE" ? "LIVE" : "DELAYED",
+                });
+              }}
+            >
+              <Image
+                src={star ? fullStar : emptyStar}
+                alt={star ? "찜됨" : "찜 안됨"}
+                width={20}
+                height={20}
+              />
+              찜
+            </Button>
+
+            {isLive && (
+              <LiveActionButton
+                auctionStatus={product.auctionStatus}
+                onEnter={() => {
+                  addSubscribedAuctionId(product.auctionRoomId);
+                  setActiveAuctionId(product.auctionRoomId);
+                  route.push("/auction/liveRoom");
+                }}
+                liveTime={product.liveTime}
+              />
+            )}
+
+            <Activity mode={me?.id === sellerId ? "hidden" : "visible"}>
+              {product?.type === "DELAYED" && (
+                <>
+                  {getDelayStatus(product.auctionStatus) === "ONGOING" ? (
+                    <>
+                      <DelayedBidSection
+                        me={me}
+                        productId={product.id}
+                        isOpen={isBidOpen}
+                        modalToggle={(bool: boolean) => {
+                          setIsBidOpen(bool);
+                          setIsBuyNowOpen(false);
+                        }}
+                        currentBid={product.currentPrice}
+                      />
+                      <DelayedBuyNowSection
+                        me={me}
+                        productId={product.id}
+                        isOpen={isBuyNowOpen}
+                        modalToggle={(bool: boolean) => {
+                          setIsBuyNowOpen(bool);
+                          setIsBidOpen(false);
+                        }}
+                        buyNowPrice={product.buyNowPrice}
+                      />
+                    </>
+                  ) : (
+                    <Button className="bg-custom-brown/50 flex-1 text-white">마감</Button>
+                  )}
+                </>
+              )}
+            </Activity>
+
+            {me?.id === sellerId ? (
+              <Button
+                className="bg-custom-orange-dark flex-1 text-white"
+                leftIcon={<SquarePen size={18} />}
+                onClick={() => route.push(`${path}/modify`)}
+              >
+                <span className="sm:hidden">수정</span>
+                <span className="hidden sm:inline">수정하기</span>
+              </Button>
+            ) : (
+              <>
+                {product.type === "DELAYED" && (
+                  <Button
+                    onClick={() => route.push(`/message/item/${product.id}`)}
+                    className="bg-custom-orange-dark flex-1 text-white"
+                    leftIcon={<MessageCircle size={18} />}
+                  >
+                    대화하기
+                  </Button>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <ContentContainer className="bg-content-area text-title-main border-border-main/10 shadow-flat-light min-h-100 w-full p-5 whitespace-pre-wrap md:w-full md:text-xl">
+        {product?.description}
+      </ContentContainer>
+    </div>
+  );
+}
