@@ -11,13 +11,13 @@ import Link from "next/link";
 import { Url } from "next/dist/shared/lib/router/router";
 import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
 
-export default function NotificationItem({
-  notify,
-  className,
-}: {
+interface NotificationItemProps {
   notify: NotificationItem<NotificationType>;
   className?: string;
-}) {
+  isNew: boolean;
+}
+
+export default function NotificationItem({ notify, className, isNew }: NotificationItemProps) {
   const notifyRoute = getNotificationRoute(notify);
   const { mutate } = useDeleteNotify(notify.id);
   const { addSubscribedAuctionId, setActiveAuctionId } = useLiveRoomStore(state => state);
@@ -25,7 +25,8 @@ export default function NotificationItem({
     <div
       className={twMerge(
         `border-border-main group bg-btn-default text-custom-dark-brown relative mb-6 ml-14 flex min-h-[52px] items-center gap-3 rounded-lg border-2 px-4 py-3 shadow-[3px_3px_0_#A1887F]`,
-        className
+        className,
+        isNew && "border-custom-red/60 border-3"
       )}
     >
       {<Image src={tape} alt="`tape" className="absolute -left-5 -rotate-3" />}
