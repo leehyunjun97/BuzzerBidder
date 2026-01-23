@@ -1,20 +1,20 @@
 "use client";
 
 import test from "@/assets/images/sidebar/BBlogo.png";
-import Button from "@/components/common/Button";
-import ContentContainer from "@/components/common/ContentContainer";
-import Input from "@/components/common/Input";
-import WrapperImage from "@/components/common/WrapperImage";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import { useEffect, useState } from "react";
 import { useUpdateMe } from "@/features/auth/hooks/useUpdateMe";
 import { useRouter } from "next/navigation";
 import { useSignOut } from "@/features/auth/hooks/useSignOut";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
 import { useMe } from "@/features/auth/hooks/useMe";
 import { useUploadImages } from "@/features/image/hooks/useUploadImages";
 import closeIcon from "@/assets/mypage/closeButton.svg";
 import Image from "next/image";
 import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
+import WrapperImage from "@/components/common/ui/WrapperImage";
+import Button from "@/components/common/ui/Button";
+import Input from "@/components/common/ui/Input";
 
 export default function MyIntro() {
   const { data: user } = useMe();

@@ -3,15 +3,15 @@
 import StageBarBackground from "@/components/auction/live/liveRoom/stage/StageBarBackground";
 import LiveRoomList from "@/components/auction/live/liveRoomList/LiveRoomList";
 import RoomProducts from "@/components/auction/live/liveRoomList/RoomProducts";
-import Modal from "@/components/common/Modal";
-import PageTabArea from "@/components/common/PageTabArea";
+import Modal from "@/components/common/overlay/Modal";
 import { auctionItems } from "@/constants/route/auction";
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import { useEffect, useState } from "react";
 import useNow from "@/components/schedule/UpdateNow";
 import { formatYmd, getAuctionTimeKey, getNextAuctionSlot } from "@/utils/date";
 import { getLiveRooms } from "@/features/auction/api/liveAuction.api";
 import LiveRoomListWriteMode from "@/components/auction/live/liveRoomList/LiveRoomListWriteMode";
+import PageTabArea from "@/components/common/layout/PageTabArea";
 
 type AuctionPageProps = {
   startAt?: string | null; // yyyy-MM-ddThh:mm:ss

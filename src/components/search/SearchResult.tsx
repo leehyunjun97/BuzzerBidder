@@ -1,6 +1,6 @@
-import EmptyContainer from "../common/EmptyContainer";
-import ProductCard from "../common/ProductCard";
-import ProductsGrid from "../common/ProductsGrid";
+import EmptyContainer from "../common/layout/EmptyContainer";
+import ProductCard from "../common/productcard/ProductCard";
+import ProductsGrid from "../common/productcard/ProductsGrid";
 import SearchState from "./SearchState";
 
 interface SearchResultProps {

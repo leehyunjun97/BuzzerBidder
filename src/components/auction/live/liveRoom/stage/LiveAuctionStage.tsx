@@ -9,13 +9,13 @@ import BidButton from "./BidButton";
 import { twMerge } from "tailwind-merge";
 import { getBidSteps } from "@/utils/auction";
 import { useEffect, useState } from "react";
-import PriceInput from "@/components/common/PriceInput";
-import { ConfirmModal } from "@/components/common/ComfirmModal";
+import { ConfirmModal } from "@/components/common/overlay/ComfirmModal";
 import { useLiveBid } from "@/features/auction/hooks/liveAuctionRoom/useLiveAuctionRoom";
-import Toast, { ToastType } from "@/components/common/Toast";
+import Toast, { ToastType } from "@/components/common/overlay/Toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { formatRemainingTime } from "@/utils/getRemainingTime";
 import { useGetMyBizz } from "@/features/mypage/hooks/useMyBizz";
+import PriceInput from "@/components/common/ui/PriceInput";
 
 interface LiveAuctionStageProps {
   me: User | null | undefined;

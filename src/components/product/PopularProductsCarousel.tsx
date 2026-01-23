@@ -3,8 +3,8 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { useEffect, useMemo, useState } from "react";
-import ContentContainer from "@/components/common/ContentContainer";
-import ProductCard from "@/components/common/ProductCard";
+import ContentContainer from "@/components/common/layout/ContentContainer";
+import ProductCard from "@/components/common/productcard/ProductCard";
 import { useLiveHotProducts } from "@/features/product/hooks/useLiveHotProducts";
 import { useDelayedHotProducts } from "@/features/product/hooks/useDelayedHotProducts";
 import { useDelayedMostBidsProducts } from "@/features/product/hooks/useDelayedMostBidsProducts";

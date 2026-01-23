@@ -1,7 +1,7 @@
-import Footer from "@/components/common/Footer";
-import MobileHeader from "@/components/common/MobileHeader";
-import Sidebar from "@/components/common/SideBar";
-import MainContentWrapper from "@/components/common/MainContentWrapper";
+import Footer from "@/components/common/layout/Footer";
+import MobileHeader from "@/components/common/navigation/MobileHeader";
+import Sidebar from "@/components/common/navigation/SideBar";
+import MainContentWrapper from "@/components/common/layout/MainContentWrapper";
 import { getMeServer } from "@/features/auth/api/auth.server.api";
 import NotificationProvider from "@/providers/NotificationProvider";
 import SocketProvider from "@/providers/SocketProvider";

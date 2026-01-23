@@ -1,6 +1,6 @@
 import DelayProducts from "@/components/auction/delay/DelayProducts";
-import ContentContainer from "@/components/common/ContentContainer";
-import PageTabArea from "@/components/common/PageTabArea";
+import ContentContainer from "@/components/common/layout/ContentContainer";
+import PageTabArea from "@/components/common/layout/PageTabArea";
 import { auctionItems } from "@/constants/route/auction";
 import { getDelayedProducts } from "@/features/product/api/product.server.api";
 import { Suspense } from "react";

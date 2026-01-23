@@ -5,13 +5,13 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import fullStar from "@/assets/common/fullStar.svg";
 import emptyStar from "@/assets/common/emptyStar.svg";
-import BizzAmount from "./BizzAmount";
+import BizzAmount from "../BizzAmount";
 import ProductStatus from "./ProductStatus";
 import test from "@/assets/images/auction/auctioneer.svg";
-import WrapperImage from "./WrapperImage";
-import Button from "./Button";
 import { useRouter } from "next/navigation";
 import { useWishToggle } from "@/features/wish/hooks/useWishToggle";
+import WrapperImage from "../ui/WrapperImage";
+import Button from "../ui/Button";
 
 export default function ProductCard({
   product,

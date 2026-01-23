@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import { twJoin } from "tailwind-merge";
 import camera from "@/assets/camera.svg";
-import WrapperImage from "../common/WrapperImage";
+import WrapperImage from "../common/ui/WrapperImage";
 
 interface ImageUploaderProps {
   files: (File | string)[];

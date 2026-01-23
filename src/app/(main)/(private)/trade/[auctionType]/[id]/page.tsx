@@ -1,4 +1,4 @@
-import PagePrevArea from "@/components/common/PagePrevArea";
+import PagePrevArea from "@/components/common/layout/PagePrevArea";
 import TradeInfo from "@/components/trade/TradeInfo";
 import { notFound } from "next/navigation";
 

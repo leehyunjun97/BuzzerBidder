@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import TooltipPortal from "./TooltipPortal";
+import TooltipPortal from "../overlay/TooltipPortal";
 
 interface SideBarItemProps {
   src: StaticImport;

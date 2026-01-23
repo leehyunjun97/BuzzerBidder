@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import PriceInput from "../common/PriceInput";
-import Button from "../common/Button";
 import { ChevronDown } from "lucide-react";
-import { ConfirmModal } from "../common/ComfirmModal";
-import Toast from "../common/Toast";
+import { ConfirmModal } from "../common/overlay/ComfirmModal";
+import Toast from "../common/overlay/Toast";
 import { getBidUnit } from "@/utils/auction";
 import { useGetMyBizz } from "@/features/mypage/hooks/useMyBizz";
+import PriceInput from "../common/ui/PriceInput";
+import Button from "../common/ui/Button";
 
 interface BiddingSectionModalProps {
   isOpen: boolean;

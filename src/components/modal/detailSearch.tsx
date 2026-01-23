@@ -1,14 +1,14 @@
 import { Search, X } from "lucide-react";
 import Category from "../common/Category";
-import Input from "../common/Input";
 import Image from "next/image";
 import hyphen from "@/assets/modal/hyphen.svg";
-import Button from "../common/Button";
 import { PriceSlider } from "./PriceSlider";
 import { OptionCheckbox } from "./OptionCheckbox";
-import PriceInput from "../common/PriceInput";
-import ContentContainer from "../common/ContentContainer";
+import ContentContainer from "../common/layout/ContentContainer";
 import { useState } from "react";
+import Input from "../common/ui/Input";
+import PriceInput from "../common/ui/PriceInput";
+import Button from "../common/ui/Button";
 
 interface DetailSearchProps {
   onClose: () => void;

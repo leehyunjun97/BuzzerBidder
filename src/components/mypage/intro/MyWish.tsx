@@ -1,7 +1,7 @@
 "use client";
-import ContentContainer from "../../common/ContentContainer";
-import ProductsGrid from "@/components/common/ProductsGrid";
-import ProductCard from "@/components/common/ProductCard";
+import ContentContainer from "../../common/layout/ContentContainer";
+import ProductsGrid from "@/components/common/productcard/ProductsGrid";
+import ProductCard from "@/components/common/productcard/ProductCard";
 import Title from "@/components/common/Title";
 import { useMyWish } from "@/features/mypage/hooks/useMyWish";
 

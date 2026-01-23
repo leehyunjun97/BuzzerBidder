@@ -1,4 +1,3 @@
-import BaseImage from "@/components/common/BaseImage";
 import BizzAmount from "@/components/common/BizzAmount";
 import { useWishToggle } from "@/features/wish/hooks/useWishToggle";
 import fullStar from "@/assets/common/fullStar.svg";
@@ -6,6 +5,7 @@ import emptyStar from "@/assets/common/emptyStar.svg";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import BaseImage from "@/components/common/ui/BaseImage";
 
 interface RoomProductCardProps {
   product: LiveRoomItemUI;

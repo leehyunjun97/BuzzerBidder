@@ -1,6 +1,6 @@
 "use client";
 
-import BaseImage from "@/components/common/BaseImage";
+import BaseImage from "@/components/common/ui/BaseImage";
 import { cva } from "class-variance-authority";
 
 const liveChatItemVariants = cva("text-title-main-dark w-full list-none text-sm", {

@@ -1,4 +1,4 @@
-import Button from "../common/Button";
+import Button from "../common/ui/Button";
 
 export default function WithdrawResult({ onClose }: { onClose: () => void }) {
   return (

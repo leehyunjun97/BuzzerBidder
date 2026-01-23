@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Button from "../common/Button";
 import { ChevronDown } from "lucide-react";
-import { ConfirmModal } from "../common/ComfirmModal";
+import { ConfirmModal } from "../common/overlay/ComfirmModal";
+import Button from "../common/ui/Button";
 
 interface BuyNowSectionModalProps {
   isOpen: boolean;

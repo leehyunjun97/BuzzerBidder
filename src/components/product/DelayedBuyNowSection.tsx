@@ -1,8 +1,8 @@
 import { useGetMyBizz } from "@/features/mypage/hooks/useMyBizz";
-import Button from "../common/Button";
-import Toast from "../common/Toast";
+import Toast from "../common/overlay/Toast";
 import { BuyNowSectionModal } from "./BuyNowSectionModal";
 import { useBuyNowDelayProduct } from "@/features/auction/hooks/useBuyNowDelayProduct";
+import Button from "../common/ui/Button";
 
 interface DelayedBuyNowSectionProps {
   me: User | null;

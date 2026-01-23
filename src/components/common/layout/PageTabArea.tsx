@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import TabItem from "./TabItem";
+import TabItem from "../TabItem";
 
 interface PageTabAreaProps {
   items: { label: string; path: string }[];

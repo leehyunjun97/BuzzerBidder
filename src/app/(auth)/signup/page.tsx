@@ -5,8 +5,6 @@ import BBlogoSet from "@/assets/common/BBlogoSet.svg";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
 import { useEffect, useState } from "react";
 import { isSamePassword, isValidEmail, isValidPassword } from "@/utils/validation";
 // import { NoAuthOnly } from "@/features/auth/model/auth.guard";
@@ -15,8 +13,10 @@ import DashDivider from "@/components/common/DashDivider";
 import { useIssueEmailCode } from "@/features/auth/hooks/useIssueEmailCode";
 import { useVerifyEmailCode } from "@/features/auth/hooks/useVerifyEmailCode";
 import { formatMMSS, getRemainingSeconds } from "@/utils/getRemainingTime";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
 import ToastProvider from "@/providers/ToastProvider";
+import Input from "@/components/common/ui/Input";
+import Button from "@/components/common/ui/Button";
 
 type EmailVerifyStatus =
   | "idle" // 아무것도 안 함

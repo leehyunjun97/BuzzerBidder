@@ -1,11 +1,11 @@
 "use client";
 
-import OptionDropdown from "@/components/common/OptionDropdown";
+import OptionDropdown from "@/components/common/ui/OptionDropdown";
 import BizzLogCard from "./BizzLogCard";
 import { useState } from "react";
 import { useHistoryWithdrawals } from "@/features/withdrawal/hooks/useHistoryWithdrawals";
 import { useSearchParams } from "next/navigation";
-import Pagination from "@/components/common/Pagenation";
+import Pagination from "@/components/common/navigation/Pagenation";
 
 export default function MyBizzLog({ simple = false }: { simple?: boolean }) {
   const searchParams = useSearchParams();

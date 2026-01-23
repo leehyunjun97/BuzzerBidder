@@ -1,7 +1,7 @@
 "use client";
 
 import { getLiveEnterStatus } from "@/utils/auction";
-import Button from "../common/Button";
+import Button from "../common/ui/Button";
 
 interface LiveActionButtonProps {
   auctionStatus: AuctionStatus;

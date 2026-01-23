@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateMe } from "../api/updateMe.api";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
 
 export const useUpdateMe = () => {
   const qc = useQueryClient();

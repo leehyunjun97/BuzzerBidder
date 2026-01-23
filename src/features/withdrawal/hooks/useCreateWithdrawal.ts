@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createWithdrawal } from "../api/withdrawal.api";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
 
 type ErrorType = {
   msg: string;

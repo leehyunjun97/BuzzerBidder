@@ -1,9 +1,9 @@
 "use client";
 
-import Button from "@/components/common/Button";
 import { useEffect, useRef } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import Button from "../common/ui/Button";
 
 type CalendarPopoverProps = {
   open: boolean;

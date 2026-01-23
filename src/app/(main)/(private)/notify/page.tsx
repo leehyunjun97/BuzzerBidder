@@ -1,4 +1,4 @@
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import Notifications from "@/components/notify/Notifications";
 import { allReadNotifications, getNotifications } from "@/features/notify/api/notify.server.api";
 

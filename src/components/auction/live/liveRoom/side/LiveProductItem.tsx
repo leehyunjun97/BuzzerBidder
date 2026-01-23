@@ -1,9 +1,8 @@
 import BizzAmount from "@/components/common/BizzAmount";
 import { twMerge } from "tailwind-merge";
 import test from "@/assets/images/auction/auctioneer.svg";
-import Image from "next/image";
 import { getLiveStatus } from "@/utils/auction";
-import BaseImage from "@/components/common/BaseImage";
+import BaseImage from "@/components/common/ui/BaseImage";
 
 interface ProductItemProps {
   product: LiveRoomProduct;

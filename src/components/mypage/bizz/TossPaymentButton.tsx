@@ -1,5 +1,5 @@
-import Button from "@/components/common/Button";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
+import Button from "@/components/common/ui/Button";
 import { useCreatePayments } from "@/features/payments/hooks/useCreatePayments";
 
 export default function TossPaymentButton({

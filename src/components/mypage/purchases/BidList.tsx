@@ -1,8 +1,8 @@
 "use client";
 
-import ContentContainer from "@/components/common/ContentContainer";
-import ProductCard from "@/components/common/ProductCard";
-import ProductsGrid from "@/components/common/ProductsGrid";
+import ContentContainer from "@/components/common/layout/ContentContainer";
+import ProductCard from "@/components/common/productcard/ProductCard";
+import ProductsGrid from "@/components/common/productcard/ProductsGrid";
 import Title from "@/components/common/Title";
 import { useMyCurrentPurchase } from "@/features/mypage/hooks/useMyCurrentPurchase";
 import { useEffect, useState } from "react";

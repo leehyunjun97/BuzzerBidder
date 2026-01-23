@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import WriteBaseForm from "../write/WriteBaseForm";
-import ContentContainer from "../common/ContentContainer";
+import ContentContainer from "../common/layout/ContentContainer";
 import ImageUploader from "../write/ImageUploader";
-import Button from "../common/Button";
-import Toast from "../common/Toast";
+import Toast from "../common/overlay/Toast";
 import { useModifyAuctionProduct } from "@/features/auction/hooks/useModifyAuctionProduct";
 import { useUploadImages } from "@/features/image/hooks/useUploadImages";
 import { useRouter } from "next/navigation";
+import Button from "../common/ui/Button";
 
 interface ProductModifyFormProps {
   product: ProductDetail;

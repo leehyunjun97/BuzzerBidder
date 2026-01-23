@@ -7,7 +7,7 @@ import LiveAuctionSide from "@/components/auction/live/liveRoom/side/LiveAuction
 import LiveAuctionStage from "@/components/auction/live/liveRoom/stage/LiveAuctionStage";
 import StageBarBackground from "@/components/auction/live/liveRoom/stage/StageBarBackground";
 import TabButton from "@/components/auction/live/liveRoom/stage/TabButton";
-import MobileSideDrawer from "@/components/common/MobileSideDrawer";
+import MobileSideDrawer from "@/components/common/overlay/MobileSideDrawer";
 
 import { enterChatRoom } from "@/features/auction/api/liveAuctionRoom.api";
 import { useRoomProducts } from "@/features/auction/hooks/liveAuctionRoom/useLiveAuctionRoom";

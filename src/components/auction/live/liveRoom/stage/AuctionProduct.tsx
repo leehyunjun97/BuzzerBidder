@@ -1,7 +1,6 @@
 import test from "@/assets/vintage.png";
-import BaseImage from "@/components/common/BaseImage";
 import BizzAmount from "@/components/common/BizzAmount";
-import Image from "next/image";
+import BaseImage from "@/components/common/ui/BaseImage";
 
 export default function AuctionProduct({
   currentStageProduct,

@@ -1,4 +1,4 @@
-import PageTabArea from "@/components/common/PageTabArea";
+import PageTabArea from "@/components/common/layout/PageTabArea";
 import { mypageItems } from "@/constants/route/mypage";
 
 export default function MypageLayout({ children }: { children: React.ReactNode }) {

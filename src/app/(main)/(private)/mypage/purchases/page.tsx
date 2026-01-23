@@ -1,4 +1,4 @@
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import BidList from "@/components/mypage/purchases/BidList";
 import PurchaseDetail from "@/components/mypage/purchases/PurchaseDetail";
 import {

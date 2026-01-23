@@ -7,11 +7,11 @@ import Image from "next/image";
 import sound from "@/assets/images/sidebar/sound.png";
 import mypage from "@/assets/images/sidebar/mypage.png";
 import login from "@/assets/images/sidebar/login.svg";
-import SideBarItems from "./SideBarItems";
 import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import SideBarItems from "./SideBarItems";
 
 export default function Sidebar({ me }: { me: User | null }) {
   const { subscribedAuctionIds } = useLiveRoomStore(state => state);
