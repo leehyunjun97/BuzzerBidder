@@ -6,6 +6,8 @@ import { getUnreadCount } from "../api/notify.client.api";
 interface NotificationStore {
   unreadCount: number;
   eventSource: EventSource | null;
+  lastSeenAt: number | null;
+  setLastSeenAt: (time: number) => void;
   connect: () => void;
   disconnect: () => void;
   initializeUnread: () => Promise<void>;
@@ -16,6 +18,7 @@ interface NotificationStore {
 export const useNotificationStore = create<NotificationStore>((set, get) => ({
   unreadCount: 0,
   eventSource: null,
+  lastSeenAt: null,
   connect: () => {
     if (get().eventSource) return;
 
@@ -63,4 +66,5 @@ export const useNotificationStore = create<NotificationStore>((set, get) => ({
 
   resetUnread: () => set({ unreadCount: 0 }),
   incrementUnread: () => set(state => ({ unreadCount: state.unreadCount + 1 })),
+  setLastSeenAt: time => set({ lastSeenAt: time }),
 }));
