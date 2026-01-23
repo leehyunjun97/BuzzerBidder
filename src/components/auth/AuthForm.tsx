@@ -1,5 +1,5 @@
 import backdrop from "@/assets/auth/authBackdrop.png";
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import Image from "next/image";
 
 export default function AuthForm({ children }: { children: React.ReactNode }) {

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import StatusBadge from "../common/StatusBadge";
+import StatusBadge from "../common/productcard/StatusBadge";
 
 import sendButton from "@/assets/message/sendButton.svg";
 import productSelector from "@/assets/message/productSelector.svg";

@@ -1,4 +1,4 @@
-import PagePrevArea from "@/components/common/PagePrevArea";
+import PagePrevArea from "@/components/common/layout/PagePrevArea";
 import WriteForm from "@/components/write/WriteForm";
 
 export default function WritePage() {

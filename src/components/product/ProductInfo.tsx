@@ -1,9 +1,7 @@
 "use client";
 
-import Button from "../common/Button";
-import ContentContainer from "../common/ContentContainer";
+import ContentContainer from "../common/layout/ContentContainer";
 import { useRouter } from "next/navigation";
-import BizzAmount from "../common/BizzAmount";
 import { getCategoryLabel } from "@/utils/category";
 import { statusMapping } from "@/utils/product";
 import { MessageCircle, SquarePen } from "lucide-react";
@@ -24,6 +22,7 @@ import { useWishToggle } from "@/features/wish/hooks/useWishToggle";
 import Image from "next/image";
 import { LiveActionButton } from "./LiveActionButton";
 import PriceSection from "./PriceSection";
+import Button from "../common/ui/Button";
 
 const ProductImageCarousel = dynamic(() => import("./ProductImageCarousel"), {
   ssr: false,

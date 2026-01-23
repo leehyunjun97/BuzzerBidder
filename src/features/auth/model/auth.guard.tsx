@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useMe } from "../hooks/useMe";
-import Toast, { ToastType } from "@/components/common/Toast";
+import Toast, { ToastType } from "@/components/common/overlay/Toast";
 const notify = (message: string, type: ToastType) => Toast({ message, type });
 
 // 로그인 필요한 페이지용

@@ -1,6 +1,6 @@
 import { useCreateWithdrawal } from "@/features/withdrawal/hooks/useCreateWithdrawal";
-import Button from "../common/Button";
-import ContentContainer from "../common/ContentContainer";
+import ContentContainer from "../common/layout/ContentContainer";
+import Button from "../common/ui/Button";
 
 type formType = {
   amount: number;

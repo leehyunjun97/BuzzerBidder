@@ -1,6 +1,6 @@
 import { RotateCw } from "lucide-react";
-import Button from "../common/Button";
 import BidsLogCard from "./BidsLogCard";
+import Button from "../common/ui/Button";
 
 export default function BidsLog({ log }: { log: ProductBidsLogItem[] }) {
   return (

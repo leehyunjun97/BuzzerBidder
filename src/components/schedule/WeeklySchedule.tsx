@@ -1,7 +1,7 @@
 "use client";
 import AuctionPage from "@/app/(main)/(public)/auction/page";
-import ContentContainer from "../common/ContentContainer";
-import Modal from "../common/Modal";
+import ContentContainer from "../common/layout/ContentContainer";
+import Modal from "../common/overlay/Modal";
 import useNow from "./UpdateNow";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";

@@ -1,8 +1,8 @@
 "use client";
 
-import OptionDropdown from "@/components/common/OptionDropdown";
-import ProductCard from "@/components/common/ProductCard";
-import ProductsGrid from "@/components/common/ProductsGrid";
+import OptionDropdown from "@/components/common/ui/OptionDropdown";
+import ProductCard from "@/components/common/productcard/ProductCard";
+import ProductsGrid from "@/components/common/productcard/ProductsGrid";
 import Title from "@/components/common/Title";
 import { useMyPurchase } from "@/features/mypage/hooks/useMyPurchase";
 import { useState } from "react";

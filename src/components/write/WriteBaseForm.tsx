@@ -1,7 +1,7 @@
 import Category from "../common/Category";
-import ContentContainer from "../common/ContentContainer";
-import Input from "../common/Input";
-import Textarea from "../common/TextArea";
+import ContentContainer from "../common/layout/ContentContainer";
+import Input from "../common/ui/Input";
+import Textarea from "../common/ui/TextArea";
 import ItemStatusRadio from "./ItemStatusRadio";
 
 interface WriteBaseFormProps {

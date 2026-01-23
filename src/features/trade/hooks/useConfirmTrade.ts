@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
 import { confirmTrade } from "../api/trade.api";
 import { useRouter } from "next/navigation";
 

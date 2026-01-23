@@ -1,7 +1,7 @@
-import ContentContainer from "../common/ContentContainer";
-import PriceInput from "../common/PriceInput";
-import Input from "../common/Input";
-import Button from "../common/Button";
+import ContentContainer from "../common/layout/ContentContainer";
+import Button from "../common/ui/Button";
+import Input from "../common/ui/Input";
+import PriceInput from "../common/ui/PriceInput";
 
 type formType = {
   amount: number;

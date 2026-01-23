@@ -1,13 +1,13 @@
 "use client";
 
 import BizzAmount from "@/components/common/BizzAmount";
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import { useMe } from "@/features/auth/hooks/useMe";
 import { useState } from "react";
 import TossPaymentButton from "./TossPaymentButton";
-import PriceInput from "@/components/common/PriceInput";
 import CreateWithdrawal from "@/components/modal/CreateWithdrawal";
 import { useMyWallet } from "@/features/payments/hooks/useMyWallet";
+import PriceInput from "@/components/common/ui/PriceInput";
 
 export default function BizzBalance() {
   const [open, setOpen] = useState(false);

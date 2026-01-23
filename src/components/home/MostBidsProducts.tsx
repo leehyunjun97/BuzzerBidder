@@ -4,7 +4,7 @@ import Link from "next/link";
 import Title from "../common/Title";
 import PopularProductsCarousel from "../product/PopularProductsCarousel";
 import { Flame } from "lucide-react";
-import EmptyContainer from "../common/EmptyContainer";
+import EmptyContainer from "../common/layout/EmptyContainer";
 
 export default function MostBidsProducts({ products }: { products: ProductCardType[] }) {
   return (

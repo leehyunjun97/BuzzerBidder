@@ -1,4 +1,4 @@
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import SearchPageClient from "@/components/search/SearchPageCliet";
 import { Suspense } from "react";
 

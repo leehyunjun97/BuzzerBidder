@@ -5,8 +5,8 @@ import { List, MessageCircle } from "lucide-react";
 import LiveSideTabButton from "./LiveSideTabButton";
 import LiveChatList from "./LiveChatList";
 import LiveProductList from "./LiveProductList";
-import Button from "@/components/common/Button";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
+import Button from "@/components/common/ui/Button";
 
 interface LiveAuctionSideProps {
   me: User | null | undefined;

@@ -5,8 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import AuthForm from "@/components/auth/AuthForm";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
 import DashDivider from "@/components/common/DashDivider";
 
 import kakao from "@/assets/auth/kakao.svg";
@@ -14,8 +12,10 @@ import google from "@/assets/auth/google.svg";
 import BBlogoSet from "@/assets/common/BBlogoSet.svg";
 
 import { useSignIn } from "@/features/auth/hooks/useSignIn";
-import Toast, { ToastType } from "@/components/common/Toast";
+import Toast, { ToastType } from "@/components/common/overlay/Toast";
 import { useSocialLogin } from "@/features/auth/hooks/useSocialLogin";
+import Input from "@/components/common/ui/Input";
+import Button from "@/components/common/ui/Button";
 
 export default function LoginPage() {
   return (

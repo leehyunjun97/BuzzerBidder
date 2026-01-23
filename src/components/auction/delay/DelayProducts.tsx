@@ -1,14 +1,14 @@
 "use client";
 
-import ProductCard from "@/components/common/ProductCard";
-import ProductsGrid from "@/components/common/ProductsGrid";
+import ProductCard from "@/components/common/productcard/ProductCard";
+import ProductsGrid from "@/components/common/productcard/ProductsGrid";
 import Title from "@/components/common/Title";
 import CategorySection from "./CategorySection";
 import { useDelayedProducts } from "@/features/product/hooks/useDelayedProducts";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getCategoryLabel } from "@/utils/category";
-import Pagination from "@/components/common/Pagenation";
-import EmptyContainer from "@/components/common/EmptyContainer";
+import Pagination from "@/components/common/navigation/Pagenation";
+import EmptyContainer from "@/components/common/layout/EmptyContainer";
 import { useState } from "react";
 import SellingToggle from "@/components/search/SellingToggle";
 import Link from "next/link";

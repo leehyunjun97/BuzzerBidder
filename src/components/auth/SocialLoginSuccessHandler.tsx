@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
 
 export default function SocialLoginSuccessHandler() {
   const router = useRouter();

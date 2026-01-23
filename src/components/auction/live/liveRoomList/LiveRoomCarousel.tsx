@@ -3,7 +3,6 @@
 import { ChevronLeft, ChevronRight, RadioIcon } from "lucide-react";
 import Image from "next/image";
 import test from "@/assets/images/auction/auctioneer.svg";
-import Button from "@/components/common/Button";
 import ticket1 from "@/assets/images/auction/ticket1.svg";
 import ticket2 from "@/assets/images/auction/ticket2.svg";
 import ticket3 from "@/assets/images/auction/ticket3.svg";
@@ -12,6 +11,7 @@ import ticket5 from "@/assets/images/auction/ticket5.svg";
 import { useMemo } from "react";
 import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
 import { useRouter } from "next/navigation";
+import Button from "@/components/common/ui/Button";
 
 interface LiveRoomCarouselProps {
   rooms: LiveRoom[];

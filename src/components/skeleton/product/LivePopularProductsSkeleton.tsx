@@ -1,6 +1,6 @@
 "use client";
 
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import Skeleton from "react-loading-skeleton";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 

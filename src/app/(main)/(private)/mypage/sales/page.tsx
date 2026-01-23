@@ -1,4 +1,4 @@
-import ContentContainer from "@/components/common/ContentContainer";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import SaleDetail from "@/components/mypage/sales/SaleDetail";
 import SaleList from "@/components/mypage/sales/SaleList";
 import { getSellProducts } from "@/features/mypage/api/myPage.server.api";

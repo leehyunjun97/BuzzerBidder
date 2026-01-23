@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { approvePayments } from "../api/Payments.api";
-import Toast from "@/components/common/Toast";
+import Toast from "@/components/common/overlay/Toast";
 import { useRouter } from "next/navigation";
 
 export const useApprovePayments = () => {

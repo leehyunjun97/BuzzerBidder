@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "../common/Button";
+import Button from "../common/ui/Button";
 
 type ConfirmModalProps = {
   title: string;

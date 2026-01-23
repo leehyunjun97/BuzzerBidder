@@ -1,7 +1,7 @@
 import { useBidDelayProduct } from "@/features/auction/hooks/useBidDelayProduct";
-import Button from "../common/Button";
-import Toast from "../common/Toast";
+import Toast from "../common/overlay/Toast";
 import { BiddingSectionModal } from "./BiddingSectionModal";
+import Button from "../common/ui/Button";
 
 interface DelayedBidSectionProps {
   me: User | null;

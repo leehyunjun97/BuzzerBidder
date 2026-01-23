@@ -1,26 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import Button from "@/components/common/Button";
-import ContentContainer from "@/components/common/ContentContainer";
-import Input from "@/components/common/Input";
-import PriceInput from "@/components/common/PriceInput";
+import ContentContainer from "@/components/common/layout/ContentContainer";
 import ImageUploader from "@/components/write/ImageUploader";
 import calendar from "@/assets/images/sidebar/calendar.png";
 import Image from "next/image";
 import { formatIsoDateTime, formatYmd, getAuctionTimeKey, getMinEndDate } from "@/utils/date";
 import { useCreateAuctionProduct } from "@/features/auction/hooks/useCreateAuctionProduct";
-import Toast, { ToastType } from "../common/Toast";
+import Toast, { ToastType } from "../common/overlay/Toast";
 import { useUploadImages } from "@/features/image/hooks/useUploadImages";
 import { useRouter } from "next/navigation";
 import EndDatePicker from "./EndDatePicker";
 
 import WriteBaseForm from "./WriteBaseForm";
-import Modal from "@/components/common/Modal";
+import Modal from "@/components/common/overlay/Modal";
 import WeeklySchedule from "@/components/schedule/WeeklySchedule";
 import useNow from "../schedule/UpdateNow";
 import { twMerge } from "tailwind-merge";
 import DashDivider from "../common/DashDivider";
+import Button from "../common/ui/Button";
+import PriceInput from "../common/ui/PriceInput";
+import Input from "../common/ui/Input";
 
 export default function WriteForm() {
   const [title, setTitle] = useState("");

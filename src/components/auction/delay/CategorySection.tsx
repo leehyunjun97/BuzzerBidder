@@ -1,7 +1,7 @@
 "use client";
 
 import Category from "../../common/Category";
-import ContentContainer from "../../common/ContentContainer";
+import ContentContainer from "../../common/layout/ContentContainer";
 
 interface CategorySectionProps {
   category: CategoryKey | null;

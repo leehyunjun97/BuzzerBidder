@@ -4,8 +4,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { twMerge } from "tailwind-merge";
 import { useCallback, useEffect, useState } from "react";
 import test from "@/assets/vintage.png";
-import WrapperImage from "../common/WrapperImage";
 import { getDelayStatus, getLiveStatus } from "@/utils/auction";
+import WrapperImage from "../common/ui/WrapperImage";
 
 interface ProductImageCarouselProps {
   images?: string[];

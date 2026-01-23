@@ -1,24 +1,24 @@
 "use client";
-import ContentContainer from "../common/ContentContainer";
+import ContentContainer from "../common/layout/ContentContainer";
 import Title from "../common/Title";
-import WrapperImage from "../common/WrapperImage";
-import StatusBadge from "../common/StatusBadge";
-import Input from "../common/Input";
+import StatusBadge from "../common/productcard/StatusBadge";
 import MileStoneSemiTitle from "@/components/common/MileStoneSemiTitle";
-import Button from "../common/Button";
 import TradeItem from "./TradeItem";
 import { useTradeDetail } from "@/features/trade/hooks/useTrade";
 import { useEffect, useState } from "react";
 import { tradeStatusToUIStatus } from "@/utils/tradeStatusMapper";
-import OptionDropdown from "../common/OptionDropdown";
+import OptionDropdown from "../common/ui/OptionDropdown";
 import { CARRIER_LABEL_MAP } from "@/utils/carrierCodeMapper";
 import { useUpdateAddress } from "@/features/delivery/hooks/useUpdateAddress";
 import { useUpdateDelivery } from "@/features/delivery/hooks/useUpdateDelivery";
-import Toast from "../common/Toast";
+import Toast from "../common/overlay/Toast";
 import { buildMilestones } from "@/utils/buildMilestones";
 import ConfirmModal from "../modal/ConfirmModal";
 import { usePayBalance } from "@/features/payments/hooks/usePayBalance";
 import { useConfirmTrade } from "@/features/trade/hooks/useConfirmTrade";
+import WrapperImage from "../common/ui/WrapperImage";
+import Input from "../common/ui/Input";
+import Button from "../common/ui/Button";
 
 type TradeInfoProps = {
   auctionType: "LIVE" | "DELAYED";

@@ -1,6 +1,6 @@
 "use client";
 
-import PagePrevArea from "@/components/common/PagePrevArea";
+import PagePrevArea from "@/components/common/layout/PagePrevArea";
 import { titleMap } from "@/constants/route/product";
 import { usePathname } from "next/navigation";
 
