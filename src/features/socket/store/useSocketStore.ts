@@ -25,7 +25,7 @@ interface SocketStore {
   setInitialParticipants: (auctionId: number, count: number) => void;
   exitAuctionRoom: (chatRoomId: string, auctionId: number) => Promise<void>;
   rejoinRooms: (auctionIds: number[]) => Promise<void>;
-  clearSubscriptions: () => void; // ✨ 추가
+  clearSubscriptions: () => void;
 }
 
 type RoomSubscriptions = {
@@ -64,7 +64,7 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
 
   setReconnecting: () => {
     set({ status: "reconnecting" });
-    get().stopHeartbeat(); // 연결 끊겼으니 하트비트 중단
+    get().stopHeartbeat();
   },
 
   setDisconnected: () => {
