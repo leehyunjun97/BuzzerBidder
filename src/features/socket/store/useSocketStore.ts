@@ -2,10 +2,7 @@ import { create } from "zustand";
 import { StompSubscription } from "@stomp/stompjs";
 import { stompClient } from "../stompClient";
 import { queryClient } from "@/providers/QueryProvider";
-import { exitChatRoom } from "@/features/auction/api/liveAuctionRoom.api";
-
-type SocketStatus = "idle" | "connecting" | "connected" | "disconnected" | "error";
-type HeartbeatTimer = ReturnType<typeof setInterval> | null;
+import { enterChatRoom, exitChatRoom } from "@/features/auction/api/liveAuctionRoom.api";
 
 interface SocketStore {
   status: SocketStatus;
@@ -16,6 +13,8 @@ interface SocketStore {
   heartbeatTimer: HeartbeatTimer;
 
   setConnected: () => void;
+  setReconnecting: () => void;
+  setDisconnected: () => void;
   setError: () => void;
   startHeartbeat: () => void;
   stopHeartbeat: () => void;
@@ -25,6 +24,8 @@ interface SocketStore {
   subscribeChatRoom: (chatRoomId: string, auctionId?: number) => void;
   setInitialParticipants: (auctionId: number, count: number) => void;
   exitAuctionRoom: (chatRoomId: string, auctionId: number) => Promise<void>;
+  rejoinRooms: (auctionIds: number[]) => Promise<void>;
+  clearSubscriptions: () => void;
 }
 
 type RoomSubscriptions = {
@@ -61,6 +62,16 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
     set({ pendingSubscribe: [] });
   },
 
+  setReconnecting: () => {
+    set({ status: "reconnecting" });
+    get().stopHeartbeat();
+  },
+
+  setDisconnected: () => {
+    set({ status: "disconnected" });
+    get().stopHeartbeat();
+  },
+
   setError: () => {
     get().stopHeartbeat();
     set({ status: "error" });
@@ -69,15 +80,10 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
   startHeartbeat: () => {
     const { heartbeatTimer } = get();
     if (heartbeatTimer) {
-      console.log("[HB] already running");
       return;
     }
 
-    console.log("[HB] start heartbeat");
-
     const timer = setInterval(() => {
-      console.log("[HB] heartbeat sent", Date.now());
-
       stompClient.publish({
         destination: "/send/auction/heartbeat",
         body: JSON.stringify({}),
@@ -91,7 +97,6 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
     const { heartbeatTimer } = get();
 
     if (heartbeatTimer) {
-      console.log("[HB] stop heartbeat");
       clearInterval(heartbeatTimer);
       set({ heartbeatTimer: null });
     } else {
@@ -274,5 +279,24 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
         };
       });
     }
+  },
+
+  rejoinRooms: async (auctionIds: number[]) => {
+    await Promise.all(
+      auctionIds.map(async auctionId => {
+        try {
+          const { chatRoomId } = await enterChatRoom(auctionId);
+          const chatIdStr = chatRoomId.toString();
+
+          get().subscribeChatRoom(chatIdStr, auctionId);
+        } catch (error) {
+          console.error(`❌ [Rejoin] Failed for auction ${auctionId}`, error);
+        }
+      })
+    );
+  },
+
+  clearSubscriptions: () => {
+    set({ subscriptions: {} });
   },
 }));

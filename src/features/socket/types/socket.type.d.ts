@@ -5,3 +5,5 @@ type SocketStatus =
   | "reconnecting" // 끊겼다가 재연결 중
   | "disconnected" // 명시적 종료
   | "error"; // 치명적 에러
+
+type HeartbeatTimer = ReturnType<typeof setInterval> | null;

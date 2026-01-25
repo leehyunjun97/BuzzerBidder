@@ -16,6 +16,7 @@ import { useSocketStore } from "@/features/socket/store/useSocketStore";
 import { getLiveRoomStatus, getLiveStatus } from "@/utils/auction";
 import { useMe } from "@/features/auth/hooks/useMe";
 import { useQueryClient } from "@tanstack/react-query";
+import NetworkOverlay from "@/components/auction/live/liveRoom/overlay/NetworkOverlay";
 
 export default function LiveAuctionRoomPage() {
   const { data: me } = useMe();
@@ -185,6 +186,8 @@ export default function LiveAuctionRoomPage() {
           />
         </MobileSideDrawer>
       </div>
+
+      <NetworkOverlay />
     </div>
   );
 }
