@@ -167,12 +167,23 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
       });
 
     let auctionSub = roomSubs?.auction;
+
     if (!auctionSub && auctionId !== undefined) {
       auctionSub = stompClient.subscribe(`/receive/auction/${auctionId}`, frame => {
         const data = JSON.parse(frame.body);
 
+        const invalidateAuctionQueries = () => {
+          queryClient.invalidateQueries({
+            queryKey: ["live-room-products", auctionId],
+          });
+          queryClient.invalidateQueries({
+            queryKey: ["my-bizz"],
+          });
+        };
+
         switch (data.type) {
           case "LIVE_BID": {
+            console.log("[AUCTION EVENT]", data);
             get().addMessage(chatRoomId, {
               tempId: crypto.randomUUID(),
               type: "LIVE_BID",
@@ -182,12 +193,18 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
               bidderId: data.bidderId,
               bidderNickname: data.bidderNickname,
             });
+            invalidateAuctionQueries();
+            break;
+          }
 
-            queryClient.invalidateQueries({ queryKey: ["my-bizz"] });
+          case "AUCTION_START": {
+            console.log("[AUCTION EVENT]", data);
+            invalidateAuctionQueries();
             break;
           }
 
           case "AUCTION_END": {
+            console.log("[AUCTION EVENT]", data);
             get().addMessage(chatRoomId, {
               tempId: crypto.randomUUID(),
               type: "AUCTION_END",
@@ -199,16 +216,14 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
               finalPrice: data.finalPrice,
               winnerNickname: data.winnerNickname,
             });
+            invalidateAuctionQueries();
             break;
           }
 
           default:
-            console.log("[AUCTION EVENT]", data);
+            break;
+          // console.log("[AUCTION EVENT]", data);
         }
-
-        queryClient.invalidateQueries({
-          queryKey: ["live-room-products", auctionId],
-        });
       });
     }
 
