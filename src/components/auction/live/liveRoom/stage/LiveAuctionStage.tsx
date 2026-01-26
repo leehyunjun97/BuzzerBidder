@@ -46,8 +46,6 @@ export default function LiveAuctionStage({
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const notify = (message: string, type: ToastType) => Toast({ message, type });
 
-  const queryClient = useQueryClient();
-
   const { mutate: bid } = useLiveBid();
   const { data: myBizz, isLoading } = useGetMyBizz();
 
@@ -73,12 +71,6 @@ export default function LiveAuctionStage({
       },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: ["live-room-products", roomId],
-          });
-          queryClient.invalidateQueries({
-            queryKey: ["my-bizz"],
-          });
           setIsConfirmOpen(false);
           setBidInput(0);
           notify("입찰을 성공하였습니다!", "SUCCESS");

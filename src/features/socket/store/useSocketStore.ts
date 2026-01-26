@@ -182,8 +182,12 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
               bidderId: data.bidderId,
               bidderNickname: data.bidderNickname,
             });
+            queryClient.invalidateQueries();
+            break;
+          }
 
-            queryClient.invalidateQueries({ queryKey: ["my-bizz"] });
+          case "AUCTION_START": {
+            queryClient.invalidateQueries();
             break;
           }
 
@@ -199,16 +203,13 @@ export const useSocketStore = create<SocketStore>((set, get) => ({
               finalPrice: data.finalPrice,
               winnerNickname: data.winnerNickname,
             });
+            queryClient.invalidateQueries();
             break;
           }
 
           default:
             console.log("[AUCTION EVENT]", data);
         }
-
-        queryClient.invalidateQueries({
-          queryKey: ["live-room-products", auctionId],
-        });
       });
     }
 
