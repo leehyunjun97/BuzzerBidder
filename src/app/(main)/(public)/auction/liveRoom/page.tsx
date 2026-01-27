@@ -55,8 +55,6 @@ export default function LiveAuctionRoomPage() {
     };
   }, [activeAuctionId, chatRoomIds, participantsByAuction, messagesByRoom]);
 
-  console.log(current);
-
   const { data } = useRoomProducts(current?.auctionId);
   const currentStageProduct = data?.items?.find(
     product => getLiveStatus(product.auctionStatus) === "ONGOING"
@@ -108,9 +106,20 @@ export default function LiveAuctionRoomPage() {
         console.error("exitAuctionRoom 실패 (만료된 방)", e);
       } finally {
         removeSubscribedAuctionId(auctionId);
+        if (activeAuctionId === auctionId) {
+          const next = subscribedAuctionIds.find(id => id !== auctionId);
+          if (next) setActiveAuctionId(next);
+        }
       }
     },
-    [chatRoomIds, exitAuctionRoom, removeSubscribedAuctionId]
+    [
+      activeAuctionId,
+      chatRoomIds,
+      exitAuctionRoom,
+      removeSubscribedAuctionId,
+      setActiveAuctionId,
+      subscribedAuctionIds,
+    ]
   );
 
   const sendMessage = (payload: { content: string }) => {
@@ -134,7 +143,7 @@ export default function LiveAuctionRoomPage() {
     });
   }, [activeAuctionId, queryClient]);
 
-  if (!current) return null;
+  if (!current) return <NetworkOverlay />;
 
   return (
     <div className="w-full">
