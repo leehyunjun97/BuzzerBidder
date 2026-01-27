@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface LiveRoomState {
   activeAuctionId: number | null;
@@ -55,6 +55,7 @@ export const useLiveRoomStore = create<LiveRoomState>()(
     }),
     {
       name: "live-room-store",
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
