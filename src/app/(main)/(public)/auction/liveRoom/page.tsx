@@ -55,6 +55,8 @@ export default function LiveAuctionRoomPage() {
     };
   }, [activeAuctionId, chatRoomIds, participantsByAuction, messagesByRoom]);
 
+  console.log(current);
+
   const { data } = useRoomProducts(current?.auctionId);
   const currentStageProduct = data?.items?.find(
     product => getLiveStatus(product.auctionStatus) === "ONGOING"
@@ -97,10 +99,16 @@ export default function LiveAuctionRoomPage() {
   const closeRoom = useCallback(
     async (auctionId: number) => {
       const chatRoomId = chatRoomIds[auctionId];
-      if (!chatRoomId) return;
 
-      await exitAuctionRoom(chatRoomId, auctionId);
-      removeSubscribedAuctionId(auctionId);
+      try {
+        if (chatRoomId) {
+          await exitAuctionRoom(chatRoomId, auctionId);
+        }
+      } catch (e) {
+        console.error("exitAuctionRoom 실패 (만료된 방)", e);
+      } finally {
+        removeSubscribedAuctionId(auctionId);
+      }
     },
     [chatRoomIds, exitAuctionRoom, removeSubscribedAuctionId]
   );
