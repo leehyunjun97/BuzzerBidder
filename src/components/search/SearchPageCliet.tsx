@@ -38,9 +38,9 @@ export default function SearchPageClient() {
     next: Partial<GetProductsAllParams & { auctionType: AuctionTypeKOR }>
   ) => {
     const sp = new URLSearchParams(searchParams.toString());
-    sp.delete("page");
 
     Object.entries(next).forEach(([key, value]) => {
+      if (key === "page" && value === 1) return;
       if (value === undefined || value === null || value === "") {
         sp.delete(key);
       } else {
@@ -76,15 +76,15 @@ export default function SearchPageClient() {
   };
 
   const { data, isLoading, isError, error, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useSearchProductInfinite(params);
+    useSearchProductInfinite(params, hasSearched);
 
   const cards = data?.pages.flatMap(page => page.auctions) ?? [];
 
   const loadMoreRef = useInfiniteScroll(() => {
-    if (hasNextPage && !isFetchingNextPage) {
+    if (hasNextPage && !isFetchingNextPage && !isLoading) {
       fetchNextPage();
     }
-  }, hasNextPage);
+  }, hasNextPage && !isLoading);
 
   return (
     <>
@@ -107,7 +107,8 @@ export default function SearchPageClient() {
         error={isError ? error?.message : null}
       />
 
-      <div ref={loadMoreRef} className="h-1" />
+      {hasSearched && hasNextPage && <div ref={loadMoreRef} className="h-10" />}
+
       {isFetchingNextPage && (
         <div
           className="border-custom-orange border-t-content-gray animate-spin rounded-full border-4"
