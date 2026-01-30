@@ -9,6 +9,7 @@ interface WrapperImageProps {
   className?: string;
   rounded?: RoundedSize;
   priority?: boolean;
+  sizes?: string;
 }
 
 function isValidExternalUrl(src: string) {
@@ -21,6 +22,7 @@ export default function WrapperImage({
   rounded = "none",
   className,
   priority = false,
+  sizes = "(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw",
 }: WrapperImageProps) {
   let safeSrc: string | StaticImageData = test;
 
@@ -43,6 +45,7 @@ export default function WrapperImage({
         rounded={rounded}
         className={twMerge("", className)}
         priority={priority}
+        sizes={sizes}
       />
     </div>
   );

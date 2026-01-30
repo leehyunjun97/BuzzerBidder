@@ -25,7 +25,6 @@ import PriceSection from "./PriceSection";
 import Button from "../common/ui/Button";
 
 const ProductImageCarousel = dynamic(() => import("./ProductImageCarousel"), {
-  ssr: false,
   loading: () => <ProductImageCarouselSkeleton />,
 });
 
@@ -59,6 +58,7 @@ export default function ProductInfo({ initialProduct, me }: ProductInfo) {
           className="w-full"
           type={isLive ? "LIVE" : "DELAYED"}
           auctionStatus={product.auctionStatus}
+          priority={true}
         />
 
         <div className="flex flex-col gap-5 lg:h-full">

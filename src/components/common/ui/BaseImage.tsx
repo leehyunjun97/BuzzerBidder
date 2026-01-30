@@ -13,6 +13,7 @@ interface BaseImageProps {
   rounded?: RoundedSize;
   className?: string;
   priority?: boolean;
+  sizes?: string;
 }
 
 const BaseImageVariants = cva("relative h-full w-full overflow-hidden", {
@@ -34,6 +35,7 @@ export default function BaseImage({
   rounded = "none",
   className,
   priority = false,
+  sizes = "(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw",
 }: BaseImageProps) {
   const [isError, setIsError] = useState(false);
   const handleError = () => setIsError(true);
@@ -49,7 +51,7 @@ export default function BaseImage({
           priority // Next.js가 HTML head에 preload 태그를 심어줌
           fetchPriority="high"
           loading="eager"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
+          sizes={sizes}
         />
       </div>
     );
