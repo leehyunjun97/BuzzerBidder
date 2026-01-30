@@ -50,7 +50,13 @@ export default function BizzAmount({ amount, className, fontSize, iconSize }: Bi
   return (
     <span className={twMerge(bizzAmountVariants({ fontSize }), className)}>
       <span>{formatAmount(amount)}</span>
-      <Image src={Bizz} alt="bizz logo" width={iconPx} height={iconPx} />
+      <Image
+        src={Bizz}
+        alt="bizz logo"
+        width={iconPx}
+        style={{ height: "auto" }}
+        className="object-contain"
+      />
     </span>
   );
 }
