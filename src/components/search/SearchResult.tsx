@@ -55,8 +55,13 @@ export default function SearchResult({
       <>
         <div className="mt-5">
           <ProductsGrid>
-            {cards.map(product => (
-              <ProductCard context="CARD" key={product.uid} product={product} />
+            {cards.map((product, index) => (
+              <ProductCard
+                context="CARD"
+                key={product.uid}
+                product={product}
+                priority={index < 10}
+              />
             ))}
           </ProductsGrid>
         </div>
