@@ -12,6 +12,8 @@ interface BaseImageProps {
   alt: string;
   rounded?: RoundedSize;
   className?: string;
+  priority?: boolean;
+  sizes?: string;
 }
 
 const BaseImageVariants = cva("relative h-full w-full overflow-hidden", {
@@ -27,19 +29,47 @@ const BaseImageVariants = cva("relative h-full w-full overflow-hidden", {
   },
 });
 
-export default function BaseImage({ src, alt, rounded = "none", className }: BaseImageProps) {
+export default function BaseImage({
+  src,
+  alt,
+  rounded = "none",
+  className,
+  priority = false,
+  sizes = "(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw",
+}: BaseImageProps) {
   const [isError, setIsError] = useState(false);
   const handleError = () => setIsError(true);
+
+  if (priority) {
+    return (
+      <div className={twMerge(BaseImageVariants({ rounded }), className)}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          priority // Next.js가 HTML head에 preload 태그를 심어줌
+          fetchPriority="high"
+          loading="eager"
+          sizes={sizes}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={twMerge(BaseImageVariants({ rounded }), className)}>
       {!isError && (
         <Image
           src={src}
-          sizes="100%"
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
           alt={alt}
           fill
           className="object-cover"
           onError={handleError}
+          priority={priority}
+          fetchPriority={priority ? "high" : "auto"}
+          loading={priority ? "eager" : "lazy"}
         />
       )}
       {isError && (

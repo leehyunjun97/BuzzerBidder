@@ -44,7 +44,13 @@ export default function SideBarItem({
               `bg-content-area translate-y-0 shadow-[inset_3px_3px_0_rgba(0,0,0,0.25)]`
           )}
         >
-          <Image src={src} alt={path} width={22} height={22} />
+          <Image
+            src={src}
+            alt={label}
+            width={22}
+            style={{ height: "auto" }}
+            className="object-contain"
+          />
           {(typeof badgeCount === "number" && badgeCount > 0) || hasDot ? (
             <span className="bg-custom-red absolute -top-2 -right-2 flex min-h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 text-xs leading-none font-bold text-white">
               {typeof badgeCount === "number" && badgeCount > 0

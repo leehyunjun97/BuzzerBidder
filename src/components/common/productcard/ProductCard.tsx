@@ -13,15 +13,19 @@ import { useWishToggle } from "@/features/wish/hooks/useWishToggle";
 import WrapperImage from "../ui/WrapperImage";
 import Button from "../ui/Button";
 
+interface ProductCardProps {
+  product: ProductCardType;
+  context: ProductContext;
+  className?: string;
+  priority?: boolean;
+}
+
 export default function ProductCard({
   product,
   context,
   className,
-}: {
-  product: ProductCardType;
-  context: ProductContext;
-  className?: string;
-}) {
+  priority = false,
+}: ProductCardProps) {
   const router = useRouter();
 
   const { mutate: toggleWish } = useWishToggle();
@@ -48,7 +52,7 @@ export default function ProductCard({
       <Link href={product.href} className={twMerge("relative cursor-pointer", className)}>
         <div className="flex h-full w-full flex-col rounded-md border-2 border-[#4F382A] bg-[#FDF6E9] shadow-[1.5px_1.5px_0px_rgba(0,0,0,0.5)] transition-transform hover:scale-[1.01] active:scale-[0.99]">
           <div className="relative aspect-214/134 w-full overflow-hidden rounded-[3px] p-2">
-            <WrapperImage src={product.image ?? test} alt={product.title} />
+            <WrapperImage src={product.image ?? test} alt={product.title} priority={priority} />
 
             {product.badge && (
               <div className="absolute top-3 right-3 z-10">

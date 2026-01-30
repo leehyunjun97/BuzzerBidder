@@ -1,29 +1,26 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import "react-loading-skeleton/dist/skeleton.css";
 import "@/css/globals.css";
 import Script from "next/script";
 import RootProvider from "@/providers/RootProvider";
 
-const font = localFont({
+const cookieRun = localFont({
   src: [
-    {
-      path: "../../public/fonts/CookieRun-Regular.woff",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/CookieRun-Bold.woff",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/CookieRun-Black.woff",
-      weight: "900",
-      style: "normal",
-    },
+    { path: "../../public/fonts/CookieRun-Regular.woff", weight: "400", style: "normal" },
+    { path: "../../public/fonts/CookieRun-Bold.woff", weight: "700", style: "normal" },
+    { path: "../../public/fonts/CookieRun-Black.woff", weight: "900", style: "normal" },
   ],
   display: "swap",
   variable: "--font-cookie",
+  preload: true,
+});
+
+const aclonica = localFont({
+  src: "../../public/fonts/Aclonica-Regular.woff",
+  display: "swap",
+  variable: "--font-aclonica",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -39,9 +36,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        <Script src="https://js.tosspayments.com/v2/standard" strategy="afterInteractive" />
+        <Script src="https://js.tosspayments.com/v2/standard" strategy="lazyOnload" />
       </head>
-      <body className={`${font.className} min-h-screen`}>
+      <body
+        className={`${cookieRun.variable} ${aclonica.variable} ${cookieRun.className} min-h-screen`}
+      >
         <div className="bg-bg-main mx-auto min-h-screen w-full">
           <RootProvider>{children}</RootProvider>
         </div>

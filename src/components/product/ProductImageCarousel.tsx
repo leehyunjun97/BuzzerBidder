@@ -12,6 +12,7 @@ interface ProductImageCarouselProps {
   className?: string;
   type: string;
   auctionStatus: AuctionStatus;
+  priority?: boolean;
 }
 
 export default function ProductImageCarousel({
@@ -19,6 +20,7 @@ export default function ProductImageCarousel({
   className,
   type,
   auctionStatus,
+  priority,
 }: ProductImageCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: "start" });
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -59,6 +61,8 @@ export default function ProductImageCarousel({
                   src={image ?? test}
                   alt={`product image ${idx + 1}`}
                   className="aspect-square w-full md:max-h-[520px]"
+                  priority={priority && idx === 0}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                 />
               </div>
             ))}

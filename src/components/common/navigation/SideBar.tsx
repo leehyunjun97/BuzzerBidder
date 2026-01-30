@@ -4,7 +4,6 @@ import SideBarItem from "./SideBarItem";
 import BBLogo from "@/assets/images/sidebar/BBlogo.png";
 import BBLogoBackground from "@/assets/images/sidebar/BBlogo_background.png";
 import Image from "next/image";
-import sound from "@/assets/images/sidebar/sound.png";
 import mypage from "@/assets/images/sidebar/mypage.png";
 import login from "@/assets/images/sidebar/login.svg";
 import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
@@ -33,6 +32,7 @@ export default function Sidebar({ me }: { me: User | null }) {
           src={BBLogoBackground}
           alt="logo background"
           fill
+          sizes="80px"
           className={twMerge(
             "object-cover drop-shadow-[4px_4px_0_rgba(0,0,0,0.2)] transition-opacity duration-500",
             hasSubscribed ? (isRoom ? "opacity-100" : "animate-pulse opacity-100") : "opacity-0"
@@ -43,6 +43,8 @@ export default function Sidebar({ me }: { me: User | null }) {
           src={BBLogo}
           alt="logo"
           fill
+          sizes="80px"
+          priority
           className="translate-y-[8%] scale-[1.8] object-contain drop-shadow-[0_2px_0_rgba(0,0,0,0.6)]"
         />
       </Link>
@@ -54,11 +56,6 @@ export default function Sidebar({ me }: { me: User | null }) {
         src={me ? mypage : login}
         label={me ? "내정보" : "로그인"}
       />
-      {/* <div
-        className={`border-border-sub2 shadow-flat mt-auto flex h-[50px] cursor-pointer items-center justify-center border-[3px] p-3 transition-all active:translate-y-0.5 active:shadow-none`}
-      >
-        <Image src={sound} alt="sound" width={22} height={22} />
-      </div> */}
     </div>
   );
 }
