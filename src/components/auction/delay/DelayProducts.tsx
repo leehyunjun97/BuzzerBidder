@@ -79,9 +79,6 @@ export default function DelayProducts({ initialDelayProducts }: DelayProductsPro
           />
         </div>
 
-        {/* <div className="h-[15px] w-[90%] text-right">
-          <OrderSwitch />
-        </div> */}
         {isEmpty && (
           <EmptyContainer
             className="h-100"
@@ -101,8 +98,8 @@ export default function DelayProducts({ initialDelayProducts }: DelayProductsPro
             </div>
           )}
 
-          {data?.products?.map(product => (
-            <ProductCard context="CARD" key={product.uid} product={product} />
+          {data?.products?.map((product, index) => (
+            <ProductCard context="CARD" key={product.uid} product={product} priority={index < 10} />
           ))}
         </ProductsGrid>
         {data && <Pagination totalPages={Math.ceil(data.totalCount / params.size)} />}

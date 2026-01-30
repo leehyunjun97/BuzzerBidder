@@ -8,6 +8,7 @@ interface WrapperImageProps {
   alt?: string;
   className?: string;
   rounded?: RoundedSize;
+  priority?: boolean;
 }
 
 function isValidExternalUrl(src: string) {
@@ -19,6 +20,7 @@ export default function WrapperImage({
   alt = "image",
   rounded = "none",
   className,
+  priority = false,
 }: WrapperImageProps) {
   let safeSrc: string | StaticImageData = test;
 
@@ -35,7 +37,13 @@ export default function WrapperImage({
   }
   return (
     <div className="border-border-sub2 bg-content-gray h-full w-full rounded-lg border-2">
-      <BaseImage src={safeSrc} alt={alt} rounded={rounded} className={twMerge("", className)} />
+      <BaseImage
+        src={safeSrc}
+        alt={alt}
+        rounded={rounded}
+        className={twMerge("", className)}
+        priority={priority}
+      />
     </div>
   );
 }
