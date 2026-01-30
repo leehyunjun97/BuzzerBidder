@@ -13,9 +13,7 @@ import emptyStar from "@/assets/common/emptyStar.svg";
 
 import dynamic from "next/dynamic";
 import ProductImageCarouselSkeleton from "../skeleton/product/ProductImageCarouselSkeleton";
-import DelayedBidSection from "./DelayedBidSection";
 import DelayedEndTimer from "./DelayedEndTimer";
-import DelayedBuyNowSection from "./DelayedBuyNowSection";
 import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
 import { getDelayStatus } from "@/utils/auction";
 import { useWishToggle } from "@/features/wish/hooks/useWishToggle";
@@ -27,6 +25,8 @@ import Button from "../common/ui/Button";
 const ProductImageCarousel = dynamic(() => import("./ProductImageCarousel"), {
   loading: () => <ProductImageCarouselSkeleton />,
 });
+const DelayedBidSection = dynamic(() => import("./DelayedBidSection"), { ssr: false });
+const DelayedBuyNowSection = dynamic(() => import("./DelayedBuyNowSection"), { ssr: false });
 
 interface ProductInfo {
   initialProduct: ProductDetail;
@@ -35,7 +35,10 @@ interface ProductInfo {
 
 export default function ProductInfo({ initialProduct, me }: ProductInfo) {
   const route = useRouter();
-  const { data: product, isLoading, isError } = useProductDetail(initialProduct);
+  const { data: productFromQuery, isLoading, isError } = useProductDetail(initialProduct);
+
+  const product = productFromQuery || initialProduct;
+
   const [star, setStar] = useState(product?.isLiked);
   const [isBidOpen, setIsBidOpen] = useState(false);
   const [isBuyNowOpen, setIsBuyNowOpen] = useState(false);
