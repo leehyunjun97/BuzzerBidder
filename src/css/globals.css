@@ -1,18 +1,7 @@
 @import "tailwindcss";
-@import "react-loading-skeleton/dist/skeleton.css";
 
 body {
   background-color: #fffcf4;
-}
-
-@layer base {
-  @font-face {
-    font-family: "aclonica";
-    src: url("/public//fonts//Aclonica-Regular.woff") format("woff");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
 }
 
 @layer utilities {
