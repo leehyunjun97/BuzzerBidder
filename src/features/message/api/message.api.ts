@@ -1,7 +1,13 @@
 import ClientApi from "@/lib/clientApi";
 import { DMDetailResponse } from "../types/DM.type";
 
-export const DMList = async (): Promise<DMRoomListResponse> => {
+export const DMList = async () => {
+  const hasAuthCookie = document.cookie
+    .split(";")
+    .some(item => item.trim().startsWith("accessToken="));
+
+  if (!hasAuthCookie) return null;
+
   const res = await ClientApi<DMRoomListResponse>("/chatrooms/dm", {
     method: "GET",
   });
