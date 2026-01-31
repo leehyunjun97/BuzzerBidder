@@ -1,4 +1,4 @@
-import BidsLog from "@/components/product/BidsLog";
+import BidsLog from "@/components/product/media/BidsLog";
 import { getProductBidsLog } from "@/features/product/api/product.server.api";
 
 export default async function BidsPage({ params }: { params: Promise<{ productId: string }> }) {

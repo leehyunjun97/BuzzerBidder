@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { useCallback, useEffect, useState } from "react";
 import test from "@/assets/vintage.png";
 import { getDelayStatus, getLiveStatus } from "@/utils/auction";
-import WrapperImage from "../common/ui/WrapperImage";
+import WrapperImage from "../../common/ui/WrapperImage";
 
 interface ProductImageCarouselProps {
   images?: string[];

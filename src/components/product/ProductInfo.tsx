@@ -13,20 +13,18 @@ import emptyStar from "@/assets/common/emptyStar.svg";
 
 import dynamic from "next/dynamic";
 import ProductImageCarouselSkeleton from "../skeleton/product/ProductImageCarouselSkeleton";
-import DelayedEndTimer from "./DelayedEndTimer";
+import DelayedEndTimer from "./display/DelayedEndTimer";
 import { useLiveRoomStore } from "@/features/auction/store/useLiveRoomStore";
-import { getDelayStatus } from "@/utils/auction";
 import { useWishToggle } from "@/features/wish/hooks/useWishToggle";
 import Image from "next/image";
-import { LiveActionButton } from "./LiveActionButton";
-import PriceSection from "./PriceSection";
+import { LiveActionButton } from "./display/LiveActionButton";
+import PriceSection from "./display/PriceSection";
 import Button from "../common/ui/Button";
 
-const ProductImageCarousel = dynamic(() => import("./ProductImageCarousel"), {
+const ProductImageCarousel = dynamic(() => import("./media/ProductImageCarousel"), {
   loading: () => <ProductImageCarouselSkeleton />,
 });
-const DelayedBidSection = dynamic(() => import("./DelayedBidSection"), { ssr: false });
-const DelayedBuyNowSection = dynamic(() => import("./DelayedBuyNowSection"), { ssr: false });
+const DealActionSection = dynamic(() => import("./actions/DealActionSection"), { ssr: false });
 
 interface ProductInfo {
   initialProduct: ProductDetail;
@@ -40,8 +38,6 @@ export default function ProductInfo({ initialProduct, me }: ProductInfo) {
   const product = productFromQuery || initialProduct;
 
   const [star, setStar] = useState(product?.isLiked);
-  const [isBidOpen, setIsBidOpen] = useState(false);
-  const [isBuyNowOpen, setIsBuyNowOpen] = useState(false);
   const isLive = product?.type === "LIVE";
   const path = isLive ? `/product/live/${product?.id}` : `/product/${product?.id}`;
   const sellerId = isLive ? product?.sellerId : product?.sellerUserId;
@@ -165,36 +161,7 @@ export default function ProductInfo({ initialProduct, me }: ProductInfo) {
             )}
 
             <Activity mode={me?.id === sellerId ? "hidden" : "visible"}>
-              {product?.type === "DELAYED" && (
-                <>
-                  {getDelayStatus(product.auctionStatus) === "ONGOING" ? (
-                    <>
-                      <DelayedBidSection
-                        me={me}
-                        productId={product.id}
-                        isOpen={isBidOpen}
-                        modalToggle={(bool: boolean) => {
-                          setIsBidOpen(bool);
-                          setIsBuyNowOpen(false);
-                        }}
-                        currentBid={product.currentPrice}
-                      />
-                      <DelayedBuyNowSection
-                        me={me}
-                        productId={product.id}
-                        isOpen={isBuyNowOpen}
-                        modalToggle={(bool: boolean) => {
-                          setIsBuyNowOpen(bool);
-                          setIsBidOpen(false);
-                        }}
-                        buyNowPrice={product.buyNowPrice}
-                      />
-                    </>
-                  ) : (
-                    <Button className="bg-custom-brown/50 flex-1 text-white">마감</Button>
-                  )}
-                </>
-              )}
+              {<DealActionSection product={product} me={me} />}
             </Activity>
 
             {me?.id === sellerId ? (

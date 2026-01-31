@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Title from "../common/Title";
-import PopularProductsCarousel from "../product/PopularProductsCarousel";
+import PopularProductsCarousel from "../product/media/PopularProductsCarousel";
 import { Flame } from "lucide-react";
 import EmptyContainer from "../common/layout/EmptyContainer";
 

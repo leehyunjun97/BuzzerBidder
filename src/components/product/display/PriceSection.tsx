@@ -1,7 +1,7 @@
 import Link from "next/link";
-import BizzAmount from "../common/BizzAmount";
+import BizzAmount from "../../common/BizzAmount";
 import { getDigitLength } from "@/utils/product";
-import Button from "../common/ui/Button";
+import Button from "../../common/ui/Button";
 
 interface PriceSectionProps {
   path: string;
