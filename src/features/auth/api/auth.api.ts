@@ -25,12 +25,6 @@ export async function signup(payload: UserSignupRequest): Promise<UserSignupResp
 
 // 내 정보 조회
 export async function getMe() {
-  const hasAuthCookie = document.cookie
-    .split(";")
-    .some(item => item.trim().startsWith("accessToken="));
-
-  if (!hasAuthCookie) return null;
-
   const res = await fetch("/api/auth/me", { method: "GET", credentials: "include" });
 
   if (res.status === 401) return null;
